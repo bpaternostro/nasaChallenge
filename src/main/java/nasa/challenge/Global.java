@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 
 import nasa.util.Constant;
@@ -12,20 +12,22 @@ import retrofit2.Call;
 
 public class Global {
 
-	static Logger log = Logger.getLogger(Global.class.getName());
+	final static Logger log = Logger.getLogger(Global.class.getName());
 
-	public List<Photo> getPhotos(Call<ArrayPhotos> call) {
+	public List<Photo> getPhotos(Call<ArrayPhotos> call, int init,int end) {
 
-		List<Photo> photosFinal = null;
+		List<Photo> photos = null;
 		try {
-			List<Photo> photos = call.execute().body().getPhotos();
-			photos.sort(Comparator.comparingInt(Photo::getId));
-			photosFinal = photos.subList(0, 10);
+			photos = call.execute().body().getPhotos();
 		} catch (IOException e) {
+			log.error("Error on method getPhotos: " + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return photosFinal;
+		List<Photo> photosFinal = photos.stream().sorted(Comparator.comparingInt(Photo::getId))
+				.collect(Collectors.toList());
+		
+		return photosFinal.subList(init, end);
 	}
 
 	public List<Photo> getAllPhotos(Call<ArrayPhotos> call) {
@@ -33,12 +35,16 @@ public class Global {
 		List<Photo> photos = null;
 		try {
 			photos = call.execute().body().getPhotos();
-			photos.sort(Comparator.comparingInt(Photo::getId));
+
 		} catch (IOException e) {
+			log.error("Error on method getAllPhotos: " + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return photos;
+		List<Photo> photosFinal = photos.stream().sorted(Comparator.comparingInt(Photo::getId))
+				.collect(Collectors.toList());
+
+		return photosFinal;
 	}
 
 	public String getEarthDateMartianSol(Call<ArrayPhotos> call) {
@@ -46,6 +52,7 @@ public class Global {
 		try {
 			earth_date = call.execute().body().getPhotos().get(0).getEarthDate();
 		} catch (IOException e) {
+			log.error("Error on method getEarthDateMartianSol: " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -54,7 +61,7 @@ public class Global {
 
 	public void listAllPhotos(List<Photo> photos) {
 		for (Photo item : photos) {
-			log.info(item.getId());
+			log.info("Photo with id:" + item.getId() + " has source of " + item.getImgSrc());
 
 		}
 		log.info("---------------------------------------------");
@@ -82,7 +89,7 @@ public class Global {
 				if (amountToCompare / 10 <= map.get(item)) {
 					validation = true;
 				} else {
-					log.info(item + " has not passed 10 times validation");
+					log.info(item + " has not passed 10 times validation in checkAmounts method.");
 					return false;
 				}
 			}

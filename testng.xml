@@ -4,24 +4,9 @@
 <suite name = "Suite1">
    <parameter name="sol" value="1000"></parameter>
    <parameter name="page" value="1"></parameter>
-   <test name = "test1000MartianSol">
+   <test name = "NasaTest">
       <classes>
-         <class name = "NasaTest"/>
-      </classes>
-   </test>
-    <test name = "test1000MartianSolWithEarthDate">
-      <classes>
-         <class name = "NasaTest"/>
-      </classes>
-   </test>
-    <test name = "testComparisonList">
-      <classes>
-         <class name = "NasaTest"/>
-      </classes>
-   </test>
-    <test name = "testComparisonList">
-      <classes>
-         <class name = "NasaTest"/>
+         <class name = "nasa.challenge.NasaTest"/>
       </classes>
    </test>
 </suite>

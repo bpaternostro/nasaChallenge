@@ -11,8 +11,7 @@ import retrofit2.Call;
 
 public class NasaTest extends TestBase {
 
-	String earthDateCheckMsg = "It was impossible to catch earth_date.";
-
+	
 	
 	// 1-Retrieve the first 10 Mars photos made by "Curiosity" on 1000 Martian sol.
 	@Parameters({ "sol", "page" })
@@ -39,8 +38,8 @@ public class NasaTest extends TestBase {
 			List<Photo> photos = glo.getPhotos(call);
 			glo.listAllPhotos(photos);
 		} else {
-			log.info("Test - test1000MartianSolWithEarthDate: " + earthDateCheckMsg);
-			Assert.assertTrue(false, earthDateCheckMsg);
+			log.info("Test - test1000MartianSolWithEarthDate: " + Constant.EARTHDATEMSG);
+			Assert.assertTrue(false, Constant.EARTHDATEMSG);
 		}
 
 	}
@@ -66,8 +65,8 @@ public class NasaTest extends TestBase {
 			Call<ArrayPhotos> call2 = jsonFromApi.getPhotosByEarthDate(earth_date, page, Constant.TOKEN);
 			photos2 = glo.getPhotos(call2);
 		} else {
-			log.info("Test - testComparisonList: " + earthDateCheckMsg);
-			Assert.assertTrue(false, earthDateCheckMsg);
+			log.info("Test - testComparisonList: " + Constant.EARTHDATEMSG);
+			Assert.assertTrue(false, Constant.EARTHDATEMSG);
 		}
 
 		// Assuming that both list should be equals
@@ -94,8 +93,8 @@ public class NasaTest extends TestBase {
 		earth_date = glo.getEarthDateMartianSol(callAux);
 
 		if (earth_date == null) {
-			log.info("Test - testValidateAmountOfPhotos: " + earthDateCheckMsg);
-			Assert.assertTrue(false, earthDateCheckMsg);
+			log.info("Test - testValidateAmountOfPhotos: " + Constant.EARTHDATEMSG);
+			Assert.assertTrue(false, Constant.EARTHDATEMSG);
 			return;
 		}
 

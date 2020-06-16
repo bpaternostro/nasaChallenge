@@ -13,7 +13,7 @@ public class NasaTest extends TestBase {
 
 	String earthDateCheckMsg = "It was impossible to catch earth_date.";
 
-	// prueba desde Intellij
+	
 	// 1-Retrieve the first 10 Mars photos made by "Curiosity" on 1000 Martian sol.
 	@Parameters({ "sol", "page" })
 	@Test

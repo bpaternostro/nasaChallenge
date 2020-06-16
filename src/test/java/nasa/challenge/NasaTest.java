@@ -12,7 +12,7 @@ extends TestBase
 {
 		
 
-	   
+	//prueba desde Intellij
     //1-Retrieve the first 10 Mars photos made by "Curiosity" on 1000 Martian sol.
 	@Test
     public void test1000MartianSol ()

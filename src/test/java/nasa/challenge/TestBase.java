@@ -1,15 +1,16 @@
 package nasa.challenge;
 
-import junit.framework.TestCase;
 import nasa.interfaces.JsonFromApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import org.apache.log4j.Logger;
 
-public class TestBase extends TestCase
+public class TestBase
 {
-	Retrofit retrofit;			
-	JsonFromApi jsonFromApi; 
-	Global glo;	
+	static Retrofit retrofit;			
+	static JsonFromApi jsonFromApi; 
+	static Global glo;	
+	static Logger log;
 	
 	public TestBase() {
 		retrofit= new Retrofit.Builder()
@@ -18,6 +19,8 @@ public class TestBase extends TestCase
 				.build();
 		jsonFromApi= retrofit.create(JsonFromApi.class);
 		glo = new Global();
+		log = Logger.getLogger(TestBase.class.getName());
+		
 	}
 		
 	
